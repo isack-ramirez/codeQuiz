@@ -1,0 +1,44 @@
+body{
+    font-family: sans-serif;
+}
+
+.wrapper{
+    display: flex;
+   justify-content: center;
+}
+
+.highScore{
+    display: flex;
+    
+}
+
+
+.question{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+
+
+.answers{
+    display: grid;
+    justify-content: center;
+    min-height: 15vh;
+    min-width: 20vw;
+    padding: 5px;
+    margin: 5px;
+}
+
+#q1, #q2, #q3,#q4{
+    margin: 10px;
+}
+
+#q2,#q3,#q4{
+    visibility: hidden;
+}
+
+.timer{
+    display: flex;
+    justify-content: center;
+}
