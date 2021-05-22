@@ -6,7 +6,7 @@ var q4 = document.getElementById('q4');
 var displayedQuestion = document.getElementById("displayedQuestion");
 var questionNumber = 0;
 var answerKeyNumber = 0;
-
+var userscore=0;
 
 
 
@@ -41,6 +41,7 @@ function buttonClicked() {
         document.getElementById("timerSeconds").style.color = "green"
         document.getElementById("headerText").style.color = "green"
         document.getElementById("headerText").innerHTML = "Correct!"
+        userscore+=10;
 
     }
 
@@ -50,18 +51,19 @@ function buttonClicked() {
         document.getElementById("timerSeconds").style.color = "red"
         document.getElementById("headerText").style.color = "red"
         document.getElementById("headerText").innerHTML = "Wrong!"
+        userscore-=10;
 
     }
 
     else {
-        
+
         started = true;
-        sec=100;
+        sec = 100;
         document.getElementById("headerText").style.color = "black"
         document.getElementById("headerText").innerHTML = "Test Your Knowledge!"
 
     }
-
+    console.log(userscore)
     changeQuestion();
 
 
@@ -146,13 +148,16 @@ function timer() {
 
 
         if (sec <= 0) {
+            questionNumber=0;
+            answerKeyNumber=0;
             q1.innerHTML = "Start";
             q2.style.visibility = "hidden";
             q3.style.visibility = "hidden";
             q4.style.visibility = "hidden";
-            started=false;
+            started = false;
             document.getElementById("headerText").style.color = "Black"
             document.getElementById("headerText").innerHTML = "Time up! Your score is : "
+            displayedQuestion.innerHTML=userscore;
             document.getElementById('timerSeconds').innerHTML = ' 0';
         }
     }, 300);
