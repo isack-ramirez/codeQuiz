@@ -5,12 +5,12 @@ var q3 = document.getElementById('q3');
 var q4 = document.getElementById('q4');
 var displayedQuestion = document.getElementById("displayedQuestion");
 var questionNumber = 0;
-var answerKeyNumber=-0;
+var answerKeyNumber = 0;
 
 
 
 
-var sec = 60;
+var sec;
 
 var started = false;
 
@@ -24,26 +24,43 @@ function buttonClicked() {
 
     if (started === false) {
         timer();
-        started = true;
         q2.style.visibility = "visible";
         q3.style.visibility = "visible";
         q4.style.visibility = "visible";
+
     }
 
-    
-    
+
+
     console.log(answerKeyNumber);
     console.log(questionObject.correctAnswer);
 
-    if (this.event.target.innerHTML == questionObject.correctAnswer) {
+    console.log(started);
+    if (this.event.target.innerHTML == questionObject.correctAnswer && started == true) {
         console.log("Correct");
+        document.getElementById("timerSeconds").style.color = "green"
+        document.getElementById("headerText").style.color = "green"
+        document.getElementById("headerText").innerHTML = "Correct!"
+
     }
 
-    else if (this.event.target.innerHTML !== questionObject.correctAnswer) {
+    else if (this.event.target.innerHTML !== questionObject.correctAnswer && started == true) {
         console.log("Wrong!")
         sec -= 10;
+        document.getElementById("timerSeconds").style.color = "red"
+        document.getElementById("headerText").style.color = "red"
+        document.getElementById("headerText").innerHTML = "Wrong!"
+
     }
 
+    else {
+        
+        started = true;
+        sec=100;
+        document.getElementById("headerText").style.color = "black"
+        document.getElementById("headerText").innerHTML = "Test Your Knowledge!"
+
+    }
 
     changeQuestion();
 
@@ -53,16 +70,7 @@ function buttonClicked() {
 }
 
 
-function timer() {
 
-    var timer = setInterval(function () {
-        document.getElementById('timerSeconds').innerHTML = '00:' + sec;
-        sec--;
-        if (sec < 0) {
-            clearInterval(timer);
-        }
-    }, 1000);
-}
 
 
 var questionObject = {
@@ -89,7 +97,7 @@ function changeQuestion() {
     questionNumber++;
     questionObject.choice4 = questionsArray[questionNumber];
     questionNumber++;
-    questionObject.correctAnswer=correctAnswerkey[answerKeyNumber];
+    questionObject.correctAnswer = correctAnswerkey[answerKeyNumber];
     answerKeyNumber++;
 
     displayedQuestion.innerHTML = questionObject.askedQuestion;
@@ -97,7 +105,7 @@ function changeQuestion() {
     q2.innerHTML = questionObject.choice2;
     q3.innerHTML = questionObject.choice3;
     q4.innerHTML = questionObject.choice4;
-    
+
 
 }
 
@@ -120,9 +128,33 @@ var questionsArray = [
 
 ];
 
-var correctAnswerkey=[
+var correctAnswerkey = [
     //question 0
     "For loop",
     //Question 1
     "Boolean",
 ];
+
+function timer() {
+
+    var timer = setInterval(function () {
+        document.getElementById('timerSeconds').innerHTML = '  ' + sec;
+        sec--;
+        if (sec < 0) {
+            clearInterval(timer);
+        }
+
+
+        if (sec <= 0) {
+            q1.innerHTML = "Start";
+            q2.style.visibility = "hidden";
+            q3.style.visibility = "hidden";
+            q4.style.visibility = "hidden";
+            started=false;
+            document.getElementById("headerText").style.color = "Black"
+            document.getElementById("headerText").innerHTML = "Time up! Your score is : "
+            document.getElementById('timerSeconds').innerHTML = ' 0';
+        }
+    }, 300);
+}
+
