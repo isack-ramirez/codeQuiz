@@ -58,7 +58,7 @@ function buttonClicked() {
     else {
 
         started = true;
-        sec = 100;
+        sec = 50;
         document.getElementById("headerText").style.color = "black"
         document.getElementById("headerText").innerHTML = "Test Your Knowledge!"
 
@@ -99,6 +99,8 @@ function changeQuestion() {
     questionNumber++;
     questionObject.choice4 = questionsArray[questionNumber];
     questionNumber++;
+
+    
     questionObject.correctAnswer = correctAnswerkey[answerKeyNumber];
     answerKeyNumber++;
 
@@ -107,6 +109,10 @@ function changeQuestion() {
     q2.innerHTML = questionObject.choice2;
     q3.innerHTML = questionObject.choice3;
     q4.innerHTML = questionObject.choice4;
+
+    if (answerKeyNumber==4){
+        sec=0;
+    }
 
 
 }
@@ -125,6 +131,13 @@ var questionsArray = [
     "Boolean",
     "String",
     "Binary",
+    //question 2
+    "What is the commonly used phrase when writing ones first program?",
+    "Howdy there!",
+    "Im alive",
+    "Greetings, from above",
+    "Hello, World!"
+
 
 
 
@@ -135,6 +148,8 @@ var correctAnswerkey = [
     "For loop",
     //Question 1
     "Boolean",
+    //Question 2
+    "Hello, World!"
 ];
 
 function timer() {
